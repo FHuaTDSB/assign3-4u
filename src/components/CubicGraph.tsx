@@ -1,3 +1,3 @@
 export const CubicGraph = () => {
-    return <></>
-  }
+  return <canvas id="graph" width="600" height="600"></canvas>;
+};
