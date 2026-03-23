@@ -9,9 +9,11 @@ export const App = () => {
     <>
       <CubicInput />
       <CubicEquation />
-      <CubicTable />
-      <CubicGraph />
-      <CubicHistory />
+      <div className="flex justify-around">
+        <CubicTable />
+        <CubicGraph />
+        <CubicHistory />
+      </div>
     </>
   );
 };

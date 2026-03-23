@@ -1,21 +1,21 @@
 export const CubicTable = () => {
   return (
-    <>
-      <table id="data">
+    <div>
+      <table className="bg-yellow-700 m-5 w-75">
         <tr>
-          <td className="table-subtitle">p</td>
-          <td className="table-value">0</td>
+          <td className="w-1/2 bg-white text-center">p</td>
+          <td className=" bg-white text-center">0</td>
         </tr>
         <tr>
-          <td className="table-subtitle">q</td>
-          <td className="table-value">0</td>
+          <td className=" bg-white text-center">q</td>
+          <td className=" bg-white text-center">0</td>
         </tr>
         <tr>
-          <td className="table-subtitle">Discriminant</td>
-          <td className="table-value">0</td>
+          <td className=" bg-white text-center">Discriminant</td>
+          <td className=" bg-white text-center">0</td>
         </tr>
       </table>
-      <table id="solutions">
+      <table className="bg-yellow-700 m-5 w-75">
         <tr>
           <th className="table-subtitle"></th>
           <th>Roots</th>
@@ -33,6 +33,6 @@ export const CubicTable = () => {
           <td className="table-value">(0, 0)</td>
         </tr>
       </table>
-    </>
+    </div>
   );
 };

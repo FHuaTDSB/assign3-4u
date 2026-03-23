@@ -1,6 +1,6 @@
 export const CubicEquation = () => {
   return (
-    <h3>
+    <h3 className="bg-amber-100 text-center text-yellow-700 my-10">
       <div className="coefficient inline">1</div>x<sup>3</sup>
       <div className="term inline">
         <div className="operator inline"> + </div>

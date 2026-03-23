@@ -1,5 +1,5 @@
 export const CubicHistory = () => {
-    return <>
+    return <div>
     <h2>History</h2>
     <table id="solutions">
         <tr>
@@ -9,5 +9,5 @@ export const CubicHistory = () => {
           <th>d</th>
         </tr>
       </table>
-    </>
+    </div>
   }
