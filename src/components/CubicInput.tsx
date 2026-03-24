@@ -5,7 +5,7 @@ export const CubicInput = () => {
         Cubic Solver
       </h1>
       <form
-        className="form-container grid grid-cols-5 gap-x-5 justify-self-center"
+        className="grid grid-cols-5 gap-x-5 justify-self-center"
         id="cubic"
       >
         <div className="flex flex-col items-center">
@@ -43,7 +43,7 @@ export const CubicInput = () => {
         <input
           type="submit"
           value="Save!"
-          className="form-submit text-yellow-700 bg-amber-300 transition hover:text-white hover:bg-amber-400 active:text-white active:bg-yellow-700"
+          className="text-yellow-700 bg-amber-300 transition hover:text-white hover:bg-amber-400 active:text-white active:bg-yellow-700"
         />
       </form>
     </>
