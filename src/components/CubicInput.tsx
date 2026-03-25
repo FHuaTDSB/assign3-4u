@@ -1,4 +1,5 @@
 export const CubicInput = () => {
+
   return (
     <>
       <h1 className="justify-self-center text-yellow-700 m-6 bg-amber-200 w-full text-center text-3xl">
