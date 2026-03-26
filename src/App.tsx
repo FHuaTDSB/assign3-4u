@@ -13,9 +13,9 @@ type Solutions = {
 
 export const App = () => {
   const [a, setA] = useState<number>(1);
-  const [b, setB] = useState<number>(1);
-  const [c, setC] = useState<number>(1);
-  const [d, setD] = useState<number>(1);
+  const [b, setB] = useState<number>(0);
+  const [c, setC] = useState<number>(0);
+  const [d, setD] = useState<number>(0);
 
   const fixDecimal = (value: number, fix: number): number => {
     return parseFloat(value.toFixed(fix));
@@ -79,8 +79,52 @@ export const App = () => {
 
   return (
     <>
-      <CubicInput />
-      <CubicEquation aValue={a} bValue={b} cValue={c} dValue={d} />
+      <CubicInput
+        aField={
+          <input
+            type="number"
+            className="border-5 border-yellow-700 border-double"
+            required
+            value={a}
+            onChange={(e) => setA(Number(e.target.value))}
+          />
+        }
+        bField={
+          <input
+            type="number"
+            className="border-5 border-yellow-700 border-double"
+            required
+            value={b}
+            onChange={(e) => setB(Number(e.target.value))}
+          />
+        }
+        cField={
+          <input
+            type="number"
+            className="border-5 border-yellow-700 border-double"
+            required
+            value={c}
+            onChange={(e) => setC(Number(e.target.value))}
+          />
+        }
+        dField={
+          <input
+            type="number"
+            className="border-5 border-yellow-700 border-double"
+            required
+            value={d}
+            onChange={(e) => setD(Number(e.target.value))}
+          />
+        }
+        submit={
+          <input
+            type="submit"
+            value="Save!"
+            className="text-yellow-700 bg-amber-300 transition hover:text-white hover:bg-amber-400 active:text-white active:bg-yellow-700"
+          />
+        }
+      />
+      <CubicEquation a={a} b={b} c={c} d={d} />
       <div className="flex justify-around">
         <CubicTable
           pValue={fixDecimal(p, 3)}
@@ -90,7 +134,7 @@ export const App = () => {
           x2={solutions.x2}
           x3={solutions.x3}
         />
-        <CubicGraph />
+        <CubicGraph a={a} b={b} c={c} d={d} />
         <CubicHistory />
       </div>
     </>

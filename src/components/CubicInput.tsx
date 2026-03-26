@@ -1,4 +1,14 @@
-export const CubicInput = () => {
+import type { ReactNode } from "react"
+
+type InputProps = {
+  aField: ReactNode
+  bField: ReactNode
+  cField: ReactNode
+  dField: ReactNode
+  submit: ReactNode
+}
+
+export const CubicInput = ({aField, bField, cField, dField, submit}: InputProps) => {
 
   return (
     <>
@@ -11,41 +21,21 @@ export const CubicInput = () => {
       >
         <div className="flex flex-col items-center">
           <label className="text-yellow-800 mb-4">a value:</label>
-          <input
-            type="number"
-            className="border-5 border-yellow-700 border-double"
-            required
-          />
+          {aField}
         </div>
         <div className="flex flex-col items-center">
           <label className="text-yellow-800 mb-4">b value:</label>
-          <input
-            type="number"
-            className="border-5 border-yellow-700 border-double"
-            required
-          />
+          {bField}
         </div>
         <div className="flex flex-col items-center">
           <label className="text-yellow-800 mb-4">c value:</label>
-          <input
-            type="number"
-            className="border-5 border-yellow-700 border-double"
-            required
-          />
+          {cField}
         </div>
         <div className="flex flex-col items-center">
           <label className="text-yellow-800 mb-4">d value:</label>
-          <input
-            type="number"
-            className="border-5 border-yellow-700 border-double"
-            required
-          />
+          {dField}
         </div>
-        <input
-          type="submit"
-          value="Save!"
-          className="text-yellow-700 bg-amber-300 transition hover:text-white hover:bg-amber-400 active:text-white active:bg-yellow-700"
-        />
+        {submit}
       </form>
     </>
   );
