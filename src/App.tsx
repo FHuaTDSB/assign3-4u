@@ -11,11 +11,30 @@ type Solutions = {
   x3: number | string;
 };
 
+type Save = {
+  a: number;
+  b: number;
+  c: number;
+  d: number;
+};
+
+type Extrema = {
+  max: {
+    x: number;
+    y: number;
+  } | null;
+  min: {
+    x: number;
+    y: number;
+  } | null;
+};
+
 export const App = () => {
   const [a, setA] = useState<number>(1);
   const [b, setB] = useState<number>(0);
   const [c, setC] = useState<number>(0);
   const [d, setD] = useState<number>(0);
+  const [saveList, setSaveList] = useState<Save[]>([]);
 
   const fixDecimal = (value: number, fix: number): number => {
     return parseFloat(value.toFixed(fix));
@@ -77,6 +96,8 @@ export const App = () => {
         : { x1: cardano(a, b, q, discriminant), x2: "Complex", x3: "Complex" };
   }
 
+  console.log(saveList);
+
   return (
     <>
       <CubicInput
@@ -121,6 +142,9 @@ export const App = () => {
             type="submit"
             value="Save!"
             className="text-yellow-700 bg-amber-300 transition hover:text-white hover:bg-amber-400 active:text-white active:bg-yellow-700"
+            onClick={() => {
+              setSaveList([...saveList, { a: a, b: b, c: c, d: d }]);
+            }}
           />
         }
       />
@@ -130,12 +154,10 @@ export const App = () => {
           pValue={fixDecimal(p, 3)}
           qValue={fixDecimal(q, 3)}
           discriminant={fixDecimal(discriminant, 3)}
-          x1={solutions.x1}
-          x2={solutions.x2}
-          x3={solutions.x3}
+          solutions={solutions}
         />
-        <CubicGraph a={a} b={b} c={c} d={d} />
-        <CubicHistory />
+        <CubicGraph a={a} b={b} c={c} d={d} solutions={solutions} />
+        <CubicHistory saveList={saveList} />
       </div>
     </>
   );

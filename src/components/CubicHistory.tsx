@@ -1,4 +1,16 @@
-export const CubicHistory = () => {
+type Save = {
+  a: number;
+  b: number;
+  c: number;
+  d: number;
+}
+
+type HistoryProps = {
+  saveList: Save[]
+}
+
+export const CubicHistory = ({ saveList }: HistoryProps) => {
+
   return (
     <div>
       <h2 className="justify-self-center text-yellow-700 text-2xl">History</h2>

@@ -1,13 +1,17 @@
-type TableProps = {
-  pValue: number;
-  qValue: number;
-  discriminant: number;
+type Solutions = {
   x1: number;
   x2: number | string;
   x3: number | string;
 };
 
-export const CubicTable = ({ pValue, qValue, discriminant, x1, x2, x3 }: TableProps) => {
+type TableProps = {
+  pValue: number;
+  qValue: number;
+  discriminant: number;
+  solutions: Solutions;
+};
+
+export const CubicTable = ({ pValue, qValue, discriminant, solutions }: TableProps) => {
   return (
     <div>
       <table className="m-5 w-100">
@@ -50,7 +54,7 @@ export const CubicTable = ({ pValue, qValue, discriminant, x1, x2, x3 }: TablePr
               Root 1
             </td>
             <td className="bg-white text-center border-2 border-yellow-700">
-              {x1}
+              {solutions.x1}
             </td>
             <td className="bg-white text-center border-2 border-yellow-700">
               0
@@ -61,7 +65,7 @@ export const CubicTable = ({ pValue, qValue, discriminant, x1, x2, x3 }: TablePr
               Root 2
             </td>
             <td className="bg-white text-center border-2 border-yellow-700">
-              {x2}
+              {solutions.x2}
             </td>
             <td className="bg-white text-center border-2 border-yellow-700">
               0
@@ -72,7 +76,7 @@ export const CubicTable = ({ pValue, qValue, discriminant, x1, x2, x3 }: TablePr
               Root 3
             </td>
             <td className="bg-white text-center border-2 border-yellow-700">
-              {x3}
+              {solutions.x3}
             </td>
             <td className="bg-white text-center border-2 border-yellow-700">
               0
