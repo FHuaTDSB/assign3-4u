@@ -3,19 +3,18 @@ type Save = {
   b: number;
   c: number;
   d: number;
-}
+};
 
 type HistoryProps = {
-  saveList: Save[]
-}
+  saveList: Save[];
+};
 
 export const CubicHistory = ({ saveList }: HistoryProps) => {
-
   return (
     <div>
       <h2 className="justify-self-center text-yellow-700 text-2xl">History</h2>
       <table className="m-5 w-75">
-        <tbody>
+        <thead>
           <tr>
             <th className="w-1/4 bg-yellow-500 text-center border-2 border-yellow-700">
               a
@@ -30,6 +29,8 @@ export const CubicHistory = ({ saveList }: HistoryProps) => {
               d
             </th>
           </tr>
+        </thead>
+        <tbody>
         </tbody>
       </table>
     </div>

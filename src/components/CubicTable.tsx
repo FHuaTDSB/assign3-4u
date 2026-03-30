@@ -11,7 +11,12 @@ type TableProps = {
   solutions: Solutions;
 };
 
-export const CubicTable = ({ pValue, qValue, discriminant, solutions }: TableProps) => {
+export const CubicTable = ({
+  pValue,
+  qValue,
+  discriminant,
+  solutions,
+}: TableProps) => {
   return (
     <div>
       <table className="m-5 w-100">
@@ -37,18 +42,24 @@ export const CubicTable = ({ pValue, qValue, discriminant, solutions }: TablePro
               Discriminant
             </td>
             <td className="bg-white text-center border-2 border-yellow-700">
-            {discriminant}
+              {discriminant}
             </td>
           </tr>
         </tbody>
       </table>
       <table className="m-5 w-100">
-        <tbody>
+        <thead>
           <tr>
             <th className="w-1/2 bg-yellow-500 text-center border-2 border-yellow-700"></th>
-            <th className="w-1/4 bg-yellow-500 border-2 border-yellow-700">x</th>
-            <th className="w-1/4 bg-yellow-500 border-2 border-yellow-700">y</th>
+            <th className="w-1/4 bg-yellow-500 border-2 border-yellow-700">
+              x
+            </th>
+            <th className="w-1/4 bg-yellow-500 border-2 border-yellow-700">
+              y
+            </th>
           </tr>
+          </thead>
+          <tbody>
           <tr>
             <td className="bg-white text-center border-2 border-yellow-700">
               Root 1
@@ -85,12 +96,18 @@ export const CubicTable = ({ pValue, qValue, discriminant, solutions }: TablePro
         </tbody>
       </table>
       <table className="m-5 w-100">
-        <tbody>
+        <thead>
           <tr>
             <th className="w-1/2 bg-yellow-500 text-center border-2 border-yellow-700"></th>
-            <th className="w-1/4 bg-yellow-500 border-2 border-yellow-700">x</th>
-            <th className="w-1/4 bg-yellow-500 border-2 border-yellow-700">y</th>
+            <th className="w-1/4 bg-yellow-500 border-2 border-yellow-700">
+              x
+            </th>
+            <th className="w-1/4 bg-yellow-500 border-2 border-yellow-700">
+              y
+            </th>
           </tr>
+          </thead>
+          <tbody>
           <tr>
             <td className="bg-white text-center border-2 border-yellow-700">
               Minimum

@@ -1,18 +1,23 @@
-import type { ReactNode } from "react"
+import type { ReactNode } from "react";
 
 type InputProps = {
-  aField: ReactNode
-  bField: ReactNode
-  cField: ReactNode
-  dField: ReactNode
-  submit: ReactNode
-}
+  aField: ReactNode;
+  bField: ReactNode;
+  cField: ReactNode;
+  dField: ReactNode;
+  submit: ReactNode;
+};
 
-export const CubicInput = ({aField, bField, cField, dField, submit}: InputProps) => {
-
+export const CubicInput = ({
+  aField,
+  bField,
+  cField,
+  dField,
+  submit,
+}: InputProps) => {
   const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault
-  }
+    event.preventDefault();
+  };
 
   return (
     <>
