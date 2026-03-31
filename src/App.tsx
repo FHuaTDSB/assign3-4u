@@ -101,52 +101,11 @@ export const App = () => {
   return (
     <>
       <CubicInput
-        aField={
-          <input
-            type="number"
-            className="border-5 border-yellow-700 border-double"
-            required
-            value={a}
-            onChange={(e) => setA(Number(e.target.value))}
-          />
-        }
-        bField={
-          <input
-            type="number"
-            className="border-5 border-yellow-700 border-double"
-            required
-            value={b}
-            onChange={(e) => setB(Number(e.target.value))}
-          />
-        }
-        cField={
-          <input
-            type="number"
-            className="border-5 border-yellow-700 border-double"
-            required
-            value={c}
-            onChange={(e) => setC(Number(e.target.value))}
-          />
-        }
-        dField={
-          <input
-            type="number"
-            className="border-5 border-yellow-700 border-double"
-            required
-            value={d}
-            onChange={(e) => setD(Number(e.target.value))}
-          />
-        }
-        submit={
-          <input
-            type="submit"
-            value="Save!"
-            className="text-yellow-700 bg-amber-300 transition hover:text-white hover:bg-amber-400 active:text-white active:bg-yellow-700"
-            onClick={() => {
-              setSaveList([...saveList, { a: a, b: b, c: c, d: d }]);
-            }}
-          />
-        }
+        onAChange={setA}
+        onBChange={setB}
+        onCChange={setC}
+        onDChange={setD}
+        onSubmit={setSaveList}
       />
       <CubicEquation a={a} b={b} c={c} d={d} />
       <div className="flex justify-around">
