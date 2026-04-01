@@ -18,15 +18,14 @@ type Save = {
   d: number;
 };
 
+type Point = {
+  x: number;
+  y: number;
+};
+
 type Extrema = {
-  max: {
-    x: number;
-    y: number;
-  } | null;
-  min: {
-    x: number;
-    y: number;
-  } | null;
+  max: Point | null;
+  min: Point | null;
 };
 
 export const App = () => {
@@ -95,8 +94,27 @@ export const App = () => {
         ? trigSolve(a, b, p, q)
         : { x1: cardano(a, b, q, discriminant), x2: "Complex", x3: "Complex" };
   }
+  // 3ax^2 + 2bx + c = discriminant
+  // quadratic formula = (-b +/- sqrt(b^2 - 4*a*c))/2a
+  // derivative solutions = (-2b +/- sqrt(4b^2 - 12*a*c))/6*a
+  const dSolution1: number =
+    ((-2 * b + Math.sqrt(4 * b ** 2 - 12 * a * c)) / 6) * a;
+  const dSolution2: number =
+    ((-2 * b - Math.sqrt(4 * b ** 2 - 12 * a * c)) / 6) * a;
+  const extrema1: Point = {
+    x: dSolution1,
+    y: a * dSolution1 ** 3 + b * dSolution1 ** 2 + c * dSolution1 + d,
+  };
+  const extrema2: Point = {
+    x: dSolution2,
+    y: a * dSolution2 ** 3,
+  };
+  // const extrema: Extrema =
+  //   extrema1 > extrema2
+  //     ? { max: extrema1, min: extrema2 }
+  //     : { max: extrema2, min: extrema1 };
 
-  console.log(saveList);
+  console.log(extrema1, extrema2);
 
   return (
     <>
@@ -105,6 +123,11 @@ export const App = () => {
         onBChange={setB}
         onCChange={setC}
         onDChange={setD}
+        a={a}
+        b={b}
+        c={c}
+        d={d}
+        saveList={saveList}
         onSubmit={setSaveList}
       />
       <CubicEquation a={a} b={b} c={c} d={d} />
@@ -116,7 +139,13 @@ export const App = () => {
           solutions={solutions}
         />
         <CubicGraph a={a} b={b} c={c} d={d} solutions={solutions} />
-        <CubicHistory saveList={saveList} />
+        <CubicHistory
+          onAChange={setA}
+          onBChange={setB}
+          onCChange={setC}
+          onDChange={setD}
+          saveList={saveList}
+        />
       </div>
     </>
   );

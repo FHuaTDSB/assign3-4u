@@ -74,6 +74,8 @@ export const CubicGraph = ({ a, b, c, d, solutions }: GraphProps) => {
             2 * Math.PI
           );
         }
+        ctx.fillStyle = "blue";
+        ctx.fill();
       }
     }
   }, [a, b, c, d]);

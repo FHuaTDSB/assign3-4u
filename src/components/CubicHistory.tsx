@@ -6,10 +6,20 @@ type Save = {
 };
 
 type HistoryProps = {
+  onAChange: (a: number) => void;
+  onBChange: (value: number) => void;
+  onCChange: (value: number) => void;
+  onDChange: (value: number) => void;
   saveList: Save[];
 };
 
-export const CubicHistory = ({ saveList }: HistoryProps) => {
+export const CubicHistory = ({
+  onAChange,
+  onBChange,
+  onCChange,
+  onDChange,
+  saveList,
+}: HistoryProps) => {
   return (
     <div>
       <h2 className="justify-self-center text-yellow-700 text-2xl">History</h2>
@@ -31,6 +41,31 @@ export const CubicHistory = ({ saveList }: HistoryProps) => {
           </tr>
         </thead>
         <tbody>
+          {saveList &&
+            saveList.map((saves) => (
+              <tr
+                className="bg-white transition hover:bg-gray-300"
+                onClick={() => {
+                  onAChange(saves.a);
+                  onBChange(saves.b);
+                  onCChange(saves.c);
+                  onDChange(saves.d);
+                }}
+              >
+                <td className="w-1/4 text-center border-2 border-yellow-700">
+                  {saves.a}
+                </td>
+                <td className="w-1/4 text-center border-2 border-yellow-700">
+                  {saves.b}
+                </td>
+                <td className="w-1/4 text-center border-2 border-yellow-700">
+                  {saves.c}
+                </td>
+                <td className="w-1/4 text-center border-2 border-yellow-700">
+                  {saves.d}
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
