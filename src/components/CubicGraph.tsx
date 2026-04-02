@@ -77,6 +77,10 @@ export const CubicGraph = ({ a, b, c, d, solutions, extrema }: GraphProps) => {
         ctx.fill();
         ctx.beginPath();
         if (extrema.max.x != "DNE") {
+          ctx.moveTo(
+            Number(extrema.max.x) * (50 / 3) + 250,
+            Number(extrema.max.y) * (-50 / 3) + 250
+          );
           ctx.arc(
             extrema.max.x * (50 / 3) + 250,
             Number(extrema.max.y) * (-50 / 3) + 250,

@@ -50,7 +50,7 @@ export const CubicInput = ({
           <label className="text-yellow-800 mb-4">a value:</label>
           <input
             type="number"
-            className="border-5 border-yellow-700 border-double"
+            className="border-5 border-yellow-700 border-double pl-2"
             required
             value={a}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -62,7 +62,7 @@ export const CubicInput = ({
           <label className="text-yellow-800 mb-4">b value:</label>
           <input
             type="number"
-            className="border-5 border-yellow-700 border-double"
+            className="border-5 border-yellow-700 border-double pl-2"
             required
             value={b}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +74,7 @@ export const CubicInput = ({
           <label className="text-yellow-800 mb-4">c value:</label>
           <input
             type="number"
-            className="border-5 border-yellow-700 border-double"
+            className="border-5 border-yellow-700 border-double pl-2"
             required
             value={c}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +86,7 @@ export const CubicInput = ({
           <label className="text-yellow-800 mb-4">d value:</label>
           <input
             type="number"
-            className="border-5 border-yellow-700 border-double"
+            className="border-5 border-yellow-700 border-double pl-2"
             required
             value={d}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {

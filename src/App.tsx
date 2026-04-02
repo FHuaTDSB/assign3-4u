@@ -95,9 +95,9 @@ export const App = () => {
         : { x1: cardano(a, b, q, discriminant), x2: "Complex", x3: "Complex" };
   }
   const dSolution1: number =
-    ((-2 * b + Math.sqrt(4 * b ** 2 - 12 * a * c)) / 6) * a;
+    (-2 * b + Math.sqrt(4 * b ** 2 - 12 * a * c)) / (6 * a);
   const dSolution2: number =
-    ((-2 * b - Math.sqrt(4 * b ** 2 - 12 * a * c)) / 6) * a;
+    (-2 * b - Math.sqrt(4 * b ** 2 - 12 * a * c)) / (6 * a);
   const extrema1: Point = {
     x: fixDecimal(dSolution1, 2),
     y: fixDecimal(
@@ -112,11 +112,12 @@ export const App = () => {
       2
     ),
   };
-  const extrema: Extrema = !Number.isNaN(dSolution1)
-    ? extrema1.y > extrema2.y
-      ? { max: extrema1, min: extrema2 }
-      : { max: extrema2, min: extrema1 }
-    : { max: { x: "DNE", y: "DNE" }, min: { x: "DNE", y: "DNE" } };
+  const extrema: Extrema =
+    !Number.isNaN(dSolution1) && dSolution1 != dSolution2
+      ? extrema1.y > extrema2.y
+        ? { max: extrema1, min: extrema2 }
+        : { max: extrema2, min: extrema1 }
+      : { max: { x: "DNE", y: "DNE" }, min: { x: "DNE", y: "DNE" } };
 
   return (
     <>
