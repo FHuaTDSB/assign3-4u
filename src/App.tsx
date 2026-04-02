@@ -7,8 +7,8 @@ import { useState } from "react";
 
 type Solutions = {
   x1: number;
-  x2: number | string;
-  x3: number | string;
+  x2: number | "Complex";
+  x3: number | "Complex";
 };
 
 type Save = {
@@ -19,13 +19,13 @@ type Save = {
 };
 
 type Point = {
-  x: number;
-  y: number;
+  x: number | "DNE";
+  y: number | "DNE";
 };
 
 type Extrema = {
-  max: Point | null;
-  min: Point | null;
+  max: Point;
+  min: Point;
 };
 
 export const App = () => {
@@ -94,27 +94,29 @@ export const App = () => {
         ? trigSolve(a, b, p, q)
         : { x1: cardano(a, b, q, discriminant), x2: "Complex", x3: "Complex" };
   }
-  // 3ax^2 + 2bx + c = discriminant
-  // quadratic formula = (-b +/- sqrt(b^2 - 4*a*c))/2a
-  // derivative solutions = (-2b +/- sqrt(4b^2 - 12*a*c))/6*a
   const dSolution1: number =
     ((-2 * b + Math.sqrt(4 * b ** 2 - 12 * a * c)) / 6) * a;
   const dSolution2: number =
     ((-2 * b - Math.sqrt(4 * b ** 2 - 12 * a * c)) / 6) * a;
   const extrema1: Point = {
-    x: dSolution1,
-    y: a * dSolution1 ** 3 + b * dSolution1 ** 2 + c * dSolution1 + d,
+    x: fixDecimal(dSolution1, 2),
+    y: fixDecimal(
+      a * dSolution1 ** 3 + b * dSolution1 ** 2 + c * dSolution1 + d,
+      2
+    ),
   };
   const extrema2: Point = {
-    x: dSolution2,
-    y: a * dSolution2 ** 3,
+    x: fixDecimal(dSolution2, 2),
+    y: fixDecimal(
+      a * dSolution2 ** 3 + b * dSolution2 ** 2 + c * dSolution2 + d,
+      2
+    ),
   };
-  // const extrema: Extrema =
-  //   extrema1 > extrema2
-  //     ? { max: extrema1, min: extrema2 }
-  //     : { max: extrema2, min: extrema1 };
-
-  console.log(extrema1, extrema2);
+  const extrema: Extrema = !Number.isNaN(dSolution1)
+    ? extrema1.y > extrema2.y
+      ? { max: extrema1, min: extrema2 }
+      : { max: extrema2, min: extrema1 }
+    : { max: { x: "DNE", y: "DNE" }, min: { x: "DNE", y: "DNE" } };
 
   return (
     <>
@@ -137,8 +139,16 @@ export const App = () => {
           qValue={fixDecimal(q, 3)}
           discriminant={fixDecimal(discriminant, 3)}
           solutions={solutions}
+          extrema={extrema}
         />
-        <CubicGraph a={a} b={b} c={c} d={d} solutions={solutions} />
+        <CubicGraph
+          a={a}
+          b={b}
+          c={c}
+          d={d}
+          solutions={solutions}
+          extrema={extrema}
+        />
         <CubicHistory
           onAChange={setA}
           onBChange={setB}

@@ -1,7 +1,17 @@
 type Solutions = {
   x1: number;
-  x2: number | string;
-  x3: number | string;
+  x2: number | "Complex";
+  x3: number | "Complex";
+};
+
+type Point = {
+  x: number | "DNE";
+  y: number | "DNE";
+};
+
+type Extrema = {
+  max: Point;
+  min: Point;
 };
 
 type TableProps = {
@@ -9,6 +19,7 @@ type TableProps = {
   qValue: number;
   discriminant: number;
   solutions: Solutions;
+  extrema: Extrema;
 };
 
 export const CubicTable = ({
@@ -16,6 +27,7 @@ export const CubicTable = ({
   qValue,
   discriminant,
   solutions,
+  extrema,
 }: TableProps) => {
   return (
     <div>
@@ -58,8 +70,8 @@ export const CubicTable = ({
               y
             </th>
           </tr>
-          </thead>
-          <tbody>
+        </thead>
+        <tbody>
           <tr>
             <td className="bg-white text-center border-2 border-yellow-700">
               Root 1
@@ -106,17 +118,17 @@ export const CubicTable = ({
               y
             </th>
           </tr>
-          </thead>
-          <tbody>
+        </thead>
+        <tbody>
           <tr>
             <td className="bg-white text-center border-2 border-yellow-700">
               Minimum
             </td>
             <td className="bg-white text-center border-2 border-yellow-700">
-              0
+              {extrema.min.x}
             </td>
             <td className="bg-white text-center border-2 border-yellow-700">
-              0
+              {extrema.min.y}
             </td>
           </tr>
           <tr>
@@ -124,10 +136,10 @@ export const CubicTable = ({
               Maximum
             </td>
             <td className="bg-white text-center border-2 border-yellow-700">
-              0
+              {extrema.max.x}
             </td>
             <td className="bg-white text-center border-2 border-yellow-700">
-              0
+              {extrema.max.y}
             </td>
           </tr>
         </tbody>

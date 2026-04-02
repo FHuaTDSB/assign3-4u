@@ -2,8 +2,18 @@ import { useEffect, useRef } from "react";
 
 type Solutions = {
   x1: number;
-  x2: number | string;
-  x3: number | string;
+  x2: number | "Complex";
+  x3: number | "Complex";
+};
+
+type Point = {
+  x: number | "DNE";
+  y: number | "DNE";
+};
+
+type Extrema = {
+  max: Point;
+  min: Point;
 };
 
 type GraphProps = {
@@ -12,9 +22,10 @@ type GraphProps = {
   c: number;
   d: number;
   solutions: Solutions;
+  extrema: Extrema;
 };
 
-export const CubicGraph = ({ a, b, c, d, solutions }: GraphProps) => {
+export const CubicGraph = ({ a, b, c, d, solutions, extrema }: GraphProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -43,12 +54,12 @@ export const CubicGraph = ({ a, b, c, d, solutions }: GraphProps) => {
         ctx.beginPath();
         ctx.moveTo(
           0,
-          (a * (-15) ** 3 + b * (-15) ** 2 + c * -15 + d + 15) * (50 / 3)
+          (a * (-15) ** 3 + b * (-15) ** 2 + c * -15 + d - 15) * (-50 / 3)
         );
         for (let i = -15; i < 15; i += 0.1) {
           ctx.lineTo(
             (i + 15) * (50 / 3),
-            (a * i ** 3 + b * i ** 2 + c * i + d + 15) * (50 / 3)
+            (a * i ** 3 + b * i ** 2 + c * i + d - 15) * (-50 / 3)
           );
         }
         ctx.strokeStyle = "red";
@@ -57,25 +68,37 @@ export const CubicGraph = ({ a, b, c, d, solutions }: GraphProps) => {
         ctx.beginPath();
         ctx.arc(Number(solutions.x1) * (50 / 3) + 250, 250, 3, 0, 2 * Math.PI);
         if (typeof solutions.x2 === "number") {
-          ctx.arc(
-            Number(solutions.x2) * (50 / 3) + 250,
-            250,
-            3,
-            0,
-            2 * Math.PI
-          );
+          ctx.arc(solutions.x2 * (50 / 3) + 250, 250, 3, 0, 2 * Math.PI);
         }
         if (typeof solutions.x3 === "number") {
-          ctx.arc(
-            Number(solutions.x3) * (50 / 3) + 250,
-            250,
-            3,
-            0,
-            2 * Math.PI
-          );
+          ctx.arc(solutions.x3 * (50 / 3) + 250, 250, 3, 0, 2 * Math.PI);
         }
         ctx.fillStyle = "blue";
         ctx.fill();
+        ctx.beginPath();
+        if (extrema.max.x != "DNE") {
+          ctx.arc(
+            extrema.max.x * (50 / 3) + 250,
+            Number(extrema.max.y) * (-50 / 3) + 250,
+            5,
+            0,
+            2 * Math.PI
+          );
+          ctx.moveTo(
+            Number(extrema.min.x) * (50 / 3) + 250,
+            Number(extrema.min.y) * (-50 / 3) + 250
+          );
+          ctx.arc(
+            Number(extrema.min.x) * (50 / 3) + 250,
+            Number(extrema.min.y) * (-50 / 3) + 250,
+            5,
+            0,
+            2 * Math.PI
+          );
+          ctx.strokeStyle = "green";
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
       }
     }
   }, [a, b, c, d]);
