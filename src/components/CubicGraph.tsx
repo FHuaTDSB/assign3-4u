@@ -1,20 +1,5 @@
 import { useEffect, useRef } from "react";
-
-type Solutions = {
-  x1: number;
-  x2: number | "Complex";
-  x3: number | "Complex";
-};
-
-type Point = {
-  x: number | "DNE";
-  y: number | "DNE";
-};
-
-type Extrema = {
-  max: Point;
-  min: Point;
-};
+import type { Solutions, Extrema } from "../core/types";
 
 type GraphProps = {
   a: number;
@@ -52,15 +37,9 @@ export const CubicGraph = ({ a, b, c, d, solutions, extrema }: GraphProps) => {
         ctx.strokeStyle = "black";
         ctx.stroke();
         ctx.beginPath();
-        ctx.moveTo(
-          0,
-          (a * (-15) ** 3 + b * (-15) ** 2 + c * -15 + d - 15) * (-50 / 3)
-        );
+        ctx.moveTo(0, (a * (-15) ** 3 + b * (-15) ** 2 + c * -15 + d - 15) * (-50 / 3));
         for (let i = -15; i < 15; i += 0.1) {
-          ctx.lineTo(
-            (i + 15) * (50 / 3),
-            (a * i ** 3 + b * i ** 2 + c * i + d - 15) * (-50 / 3)
-          );
+          ctx.lineTo((i + 15) * (50 / 3), (a * i ** 3 + b * i ** 2 + c * i + d - 15) * (-50 / 3));
         }
         ctx.strokeStyle = "red";
         ctx.lineWidth = 2;
@@ -77,28 +56,10 @@ export const CubicGraph = ({ a, b, c, d, solutions, extrema }: GraphProps) => {
         ctx.fill();
         ctx.beginPath();
         if (extrema.max.x != "DNE") {
-          ctx.moveTo(
-            Number(extrema.max.x) * (50 / 3) + 250,
-            Number(extrema.max.y) * (-50 / 3) + 250
-          );
-          ctx.arc(
-            extrema.max.x * (50 / 3) + 250,
-            Number(extrema.max.y) * (-50 / 3) + 250,
-            5,
-            0,
-            2 * Math.PI
-          );
-          ctx.moveTo(
-            Number(extrema.min.x) * (50 / 3) + 250,
-            Number(extrema.min.y) * (-50 / 3) + 250
-          );
-          ctx.arc(
-            Number(extrema.min.x) * (50 / 3) + 250,
-            Number(extrema.min.y) * (-50 / 3) + 250,
-            5,
-            0,
-            2 * Math.PI
-          );
+          ctx.moveTo(Number(extrema.max.x) * (50 / 3) + 250, Number(extrema.max.y) * (-50 / 3) + 250);
+          ctx.arc(extrema.max.x * (50 / 3) + 250, Number(extrema.max.y) * (-50 / 3) + 250, 5, 0, 2 * Math.PI);
+          ctx.moveTo(Number(extrema.min.x) * (50 / 3) + 250, Number(extrema.min.y) * (-50 / 3) + 250);
+          ctx.arc(Number(extrema.min.x) * (50 / 3) + 250, Number(extrema.min.y) * (-50 / 3) + 250, 5, 0, 2 * Math.PI);
           ctx.strokeStyle = "green";
           ctx.lineWidth = 2;
           ctx.stroke();
@@ -107,12 +68,5 @@ export const CubicGraph = ({ a, b, c, d, solutions, extrema }: GraphProps) => {
     }
   }, [a, b, c, d]);
 
-  return (
-    <canvas
-      className="border-2 border-yellow-700"
-      width="500"
-      height="500"
-      ref={canvasRef}
-    ></canvas>
-  );
+  return <canvas className="border-2 border-yellow-700" width="500" height="500" ref={canvasRef}></canvas>;
 };

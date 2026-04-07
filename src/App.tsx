@@ -4,29 +4,7 @@ import { CubicHistory } from "./components/CubicHistory";
 import { CubicInput } from "./components/CubicInput";
 import { CubicTable } from "./components/CubicTable";
 import { useState } from "react";
-
-type Solutions = {
-  x1: number;
-  x2: number | "Complex";
-  x3: number | "Complex";
-};
-
-type Save = {
-  a: number;
-  b: number;
-  c: number;
-  d: number;
-};
-
-type Point = {
-  x: number | "DNE";
-  y: number | "DNE";
-};
-
-type Extrema = {
-  max: Point;
-  min: Point;
-};
+import type { Solutions, Save, Point, Extrema } from "./core/types";
 
 export const App = () => {
   const [a, setA] = useState<number>(1);
@@ -40,19 +18,14 @@ export const App = () => {
   };
 
   const p: number = (3 * a * c - b ** 2) / (3 * a ** 2);
-  const q: number =
-    (27 * a ** 2 * d - 9 * a * b * c + 2 * b ** 3) / (27 * a ** 3);
-  const discriminant: number = Number(
-    fixDecimal((q / 2) ** 2 + (p / 3) ** 3, 12)
-  );
+  const q: number = (27 * a ** 2 * d - 9 * a * b * c + 2 * b ** 3) / (27 * a ** 3);
+  const discriminant: number = Number(fixDecimal((q / 2) ** 2 + (p / 3) ** 3, 12));
 
   const trigSolve = (a: number, b: number, p: number, q: number): Solutions => {
     const theta: number = Math.acos(-q / (2 * Math.sqrt(-((p / 3) ** 3)))) / 3;
     const x1: number = 2 * Math.sqrt(-p / 3) * Math.cos(theta) - b / (3 * a);
-    const x2: number =
-      2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI) / 3) - b / (3 * a);
-    const x3: number =
-      2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI) / 3) - b / (3 * a);
+    const x2: number = 2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI) / 3) - b / (3 * a);
+    const x3: number = 2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI) / 3) - b / (3 * a);
     return {
       x1: fixDecimal(x1, 2),
       x2: fixDecimal(x2, 2),
@@ -60,16 +33,9 @@ export const App = () => {
     };
   };
 
-  const cardano = (
-    a: number,
-    b: number,
-    q: number,
-    discriminant: number
-  ): number => {
+  const cardano = (a: number, b: number, q: number, discriminant: number): number => {
     const x: number =
-      Math.cbrt(-q / 2 + Math.sqrt(discriminant)) +
-      Math.cbrt(-q / 2 - Math.sqrt(discriminant)) -
-      b / (3 * a);
+      Math.cbrt(-q / 2 + Math.sqrt(discriminant)) + Math.cbrt(-q / 2 - Math.sqrt(discriminant)) - b / (3 * a);
     return fixDecimal(x, 2);
   };
 
@@ -90,27 +56,18 @@ export const App = () => {
     }
   } else {
     solutions =
-      discriminant < 0
-        ? trigSolve(a, b, p, q)
-        : { x1: cardano(a, b, q, discriminant), x2: "Complex", x3: "Complex" };
+      discriminant < 0 ? trigSolve(a, b, p, q) : { x1: cardano(a, b, q, discriminant), x2: "Complex", x3: "Complex" };
   }
-  const dSolution1: number =
-    (-2 * b + Math.sqrt(4 * b ** 2 - 12 * a * c)) / (6 * a);
-  const dSolution2: number =
-    (-2 * b - Math.sqrt(4 * b ** 2 - 12 * a * c)) / (6 * a);
+
+  const dSolution1: number = (-2 * b + Math.sqrt(4 * b ** 2 - 12 * a * c)) / (6 * a);
+  const dSolution2: number = (-2 * b - Math.sqrt(4 * b ** 2 - 12 * a * c)) / (6 * a);
   const extrema1: Point = {
     x: fixDecimal(dSolution1, 2),
-    y: fixDecimal(
-      a * dSolution1 ** 3 + b * dSolution1 ** 2 + c * dSolution1 + d,
-      2
-    ),
+    y: fixDecimal(a * dSolution1 ** 3 + b * dSolution1 ** 2 + c * dSolution1 + d, 2),
   };
   const extrema2: Point = {
     x: fixDecimal(dSolution2, 2),
-    y: fixDecimal(
-      a * dSolution2 ** 3 + b * dSolution2 ** 2 + c * dSolution2 + d,
-      2
-    ),
+    y: fixDecimal(a * dSolution2 ** 3 + b * dSolution2 ** 2 + c * dSolution2 + d, 2),
   };
   const extrema: Extrema =
     !Number.isNaN(dSolution1) && dSolution1 != dSolution2
@@ -142,21 +99,8 @@ export const App = () => {
           solutions={solutions}
           extrema={extrema}
         />
-        <CubicGraph
-          a={a}
-          b={b}
-          c={c}
-          d={d}
-          solutions={solutions}
-          extrema={extrema}
-        />
-        <CubicHistory
-          onAChange={setA}
-          onBChange={setB}
-          onCChange={setC}
-          onDChange={setD}
-          saveList={saveList}
-        />
+        <CubicGraph a={a} b={b} c={c} d={d} solutions={solutions} extrema={extrema} />
+        <CubicHistory onAChange={setA} onBChange={setB} onCChange={setC} onDChange={setD} saveList={saveList} />
       </div>
     </>
   );
